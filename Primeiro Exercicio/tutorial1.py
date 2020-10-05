@@ -7,7 +7,7 @@ dimensao = 2
 populacao = []
 tam_pop = 100
 atual = 1
-geracoes = 100
+geracoes = 5
 media = 0.0
 
 def func_obj(x):
@@ -59,8 +59,8 @@ def intBin(bin, n):
 		valor += 2**i * bin[i]
 	return valor
 
-def torneio(populacao):
-	pais_vencedores = [] #indice no vetor populacao dos pais que ganharam os torneios
+def Torneio(populacao):
+	pais_vencedores = [] #indice no vetor populacao dos pais que ganharam os Torneios
 	pv = 0.9
 	i = 0
 	while i < tam_pop:
@@ -70,9 +70,9 @@ def torneio(populacao):
 			p2 = random.randrange(0, tam_pop)
 		chance = random.random()
 		if((populacao[p1].fitness > populacao[p2].fitness and chance >= pv) or populacao[p1].fitness < populacao[p2].fitness and chance < pv):
-			#para o primeiro pai ser vencedor, o fitness dele tem que ser maior ja que um fitness maior que dizer que o individuo é mais propicio a ser pai
-			#OU o fitness dele precisa necessáriamente ser menor mas ao mesmo tempo ter atingido a chance do "pior" pai ganhar
-			#mesma ideia para decidir se o segundo pai ganhou
+			#como é um problema de minimização quando o fitness do primeiro pai for MAIOR, a chance gerada aleatóriamente precisa, também, ser
+			#MAIOR do que o valor pré definido (ou seja, a chance desse cara com fitness maior ser escolhido é MENOR)
+			#caso o fitness seja MENOR, então ele tem 90% de chance de ser escolhido ja que 90% dos números entre 0 e 1 são MENORE que 0.9
 			pais_vencedores.append(p1)
 		else:
 			pais_vencedores.append(p2)
@@ -81,8 +81,8 @@ def torneio(populacao):
 		
 	return pais_vencedores
 
-def cruzamento(pai1, pai2, populacao, pop_aux):
-	#gera dois indivíduos aleatóriamente que serão alterados de acordo com os resultados do cruzamento
+def Cruzamento(pai1, pai2, populacao, pop_aux):
+	#gera dois indivíduos aleatóriamente que serão alterados de acordo com os resultados do Cruzamento
 	filho1 = Individuo(dimensao)
 	filho2 = Individuo(dimensao)
 
@@ -99,7 +99,7 @@ def cruzamento(pai1, pai2, populacao, pop_aux):
 	pop_aux.append(filho1)
 	pop_aux.append(filho2)
 
-def mutacao(individuo):
+def Mutacao(individuo):
 	#a mutação vai inverter os dois primeiros digitos de CADA uma das representações binárias do individuo em questão
 	for i in range(dimensao):
 		if individuo.binario[i][0] == 0:
@@ -111,6 +111,17 @@ def mutacao(individuo):
 			individuo.binario[i][1] = 1
 		else:
 			individuo.binario[i][1] = 0
+
+def Elitismo(populacao):
+	fitness = 1000
+	indice = 0
+	for i in range(len(populacao)):
+		if populacao[i].fitness < fitness:
+			fitness = populacao[i].fitness
+			indice = i
+	
+	return indice
+
 #gera uma população com individuos aleatórios
 for i in range(tam_pop):
 	populacao.append(Individuo(dimensao))
@@ -119,20 +130,27 @@ for i in populacao:
 	i.fitness = func_obj(RepresentacaoReal(i))
 #começa o AG
 while atual < geracoes:
-	indice_ganhadores = torneio(populacao)
+	indice_ganhadores = Torneio(populacao)
 	#print("ganhadores\n", indice_ganhadores)
 	pop_aux = []
 	n_cruz = 0
 	while n_cruz < len(indice_ganhadores):
-		cruzamento(indice_ganhadores[n_cruz],indice_ganhadores[n_cruz+1], populacao, pop_aux)
+		Cruzamento(indice_ganhadores[n_cruz],indice_ganhadores[n_cruz+1], populacao, pop_aux)
 		n_cruz+=2
 
 	for i in pop_aux:
 		c_mut = random.random()
 		if c_mut <= 0.3:
-			mutacao(i)
-
+			Mutacao(i)
+	elitismo = Elitismo(populacao)
+	#A função de elitismo serve para saber o índice do indivíduo com melhor (no caso, menor) fitness
+	armazenar = Individuo(dimensao)
+	armazenar = populacao[elitismo]
+	#gera um individuo auxiliar e temporário para ser armazenado na população "final" da geração, que vai substituir alguém aleatóriamente
+	#garantindo que o melhor individuo sempre esteja nas populações futuras
 	populacao = pop_aux[:]
+	indi_aleatorio = random.randrange(0, len(populacao)-1)
+	populacao[indi_aleatorio] = armazenar
 
 	for i in populacao:
 		i.fitness = func_obj(RepresentacaoReal(i))
