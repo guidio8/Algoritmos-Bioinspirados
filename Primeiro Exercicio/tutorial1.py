@@ -27,10 +27,11 @@ def func_obj(x):
 class Individuo:
 	def __init__(self, dimensao):
 		self.binario = []
+		#Quando cada individuo possuir mais do que uma dimensão, cada um vai ser uma matriz onde cada coluna é uma representação binária
 		for i in range(dimensao):
 			self.binario.append(GerarIndividuo())
 		self.fitness = 0
-
+#funcao que gera uma representação binária aleatória de 6 dígitos para cada indivíduo
 def GerarIndividuo():
 	individuo = []
 	for i in range(6):
@@ -81,9 +82,12 @@ def torneio(populacao):
 	return pais_vencedores
 
 def cruzamento(pai1, pai2, populacao, pop_aux):
+	#gera dois indivíduos aleatóriamente que serão alterados de acordo com os resultados do cruzamento
 	filho1 = Individuo(dimensao)
 	filho2 = Individuo(dimensao)
 
+	#dois pais vão gerar dois filhos onde o PRIMEIRO filho possui os 3 primeiros digitos do pai 1 e os 3 ultimos do pai 2
+	#e o SEGUNDO filho possui os 3 primeiros digitos do pai 2 e os 3 ultimos do pai 1
 	for i in range(dimensao):
 		for j in range(0,3):
 			filho1.binario[i-1][j] = populacao[pai1].binario[i-1][j]
@@ -94,9 +98,9 @@ def cruzamento(pai1, pai2, populacao, pop_aux):
 
 	pop_aux.append(filho1)
 	pop_aux.append(filho2)
-	#pop_aux.append(filho2)
 
 def mutacao(individuo):
+	#a mutação vai inverter os dois primeiros digitos de CADA uma das representações binárias do individuo em questão
 	for i in range(dimensao):
 		if individuo.binario[i][0] == 0:
 			individuo.binario[i][0] = 1
@@ -107,13 +111,13 @@ def mutacao(individuo):
 			individuo.binario[i][1] = 1
 		else:
 			individuo.binario[i][1] = 0
-
+#gera uma população com individuos aleatórios
 for i in range(tam_pop):
 	populacao.append(Individuo(dimensao))
-
+#calcula o fitness de cada indivíduo
 for i in populacao:
 	i.fitness = func_obj(RepresentacaoReal(i))
-
+#começa o AG
 while atual < geracoes:
 	indice_ganhadores = torneio(populacao)
 	#print("ganhadores\n", indice_ganhadores)
