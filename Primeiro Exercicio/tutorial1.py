@@ -9,6 +9,8 @@ tam_pop = int(sys.argv[3] )
 geracoes = int(sys.argv[4])
 chance_mutacao = float(sys.argv[1])
 taxa_cruzamento = float(sys.argv[2])
+execucao = sys.argv[5]
+instancia = sys.argv[6]
 dimensao = 2
 populacao = []
 atual = 1
@@ -84,6 +86,20 @@ def Torneio(populacao):
 		i+=1
 		
 	return pais_vencedores
+
+def EscreveArquivo(media, desvio, melhor_fitness, instancia, execucao):
+	folder_name = 'tabelas'
+	if not os.path.exists(folder_name):
+	    os.makedirs(folder_name)
+	    os.chdir(folder_name)
+	else:
+	    os.chdir(folder_name)
+	path = ""
+	file_name = 'file' + instancia + '.csv'
+	f = open(file_name, "+a")
+	if(execucao == '1'):
+	    f.write(',' + 'Media' + ',' + 'Desvio' + ',' + 'Melhor Fitness' + '\n')
+	f.write(execucao + ',' + str(media) + ',' + str(desvio) + ',' + str(melhor_fitness) + '\n')
 
 def Cruzamento(pai1, pai2, populacao, pop_aux):
 	#gera dois indivíduos aleatóriamente que serão alterados de acordo com os resultados do Cruzamento
@@ -164,13 +180,13 @@ while atual < geracoes:
 
 	atual += 1
 
-#populacao[0].binario[0] = [0,0,0,0,0,1]
-#populacao[0].fitness = func_obj(RepresentacaoReal(populacao[0]))
+vetor_fitness = []
 
+for i in populacao:
+	vetor_fitness.append(i.fitness)
 
-for i in range(len(populacao)):
-	media = media + populacao[i].fitness
+melhor_fitness = min(vetor_fitness)
+media = np.mean(vetor_fitness)
+desvio = np.std(vetor_fitness)
 
-media = media/len(populacao)
-
-print("Media: ",media)
+EscreveArquivo(media, desvio, melhor_fitness, instancia, execucao)
