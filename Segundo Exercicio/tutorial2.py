@@ -113,7 +113,7 @@ def Mutacao(individuo):
 	indice = random.randrange(0, dimensao -1)
 	individuo.real[indice] = random.random()
 
-def EscreveArquivo(media, desvio, melhor_fitness, instancia):
+def EscreveArquivo(media, desvio, melhor_fitness, instancia, execucao):
 	folder_name = 'tabelas'
 	if not os.path.exists(folder_name):
 	    os.makedirs(folder_name)
@@ -123,7 +123,7 @@ def EscreveArquivo(media, desvio, melhor_fitness, instancia):
 	path = ""
 	file_name = 'file' + instancia + '.csv'
 	f = open(file_name, "+a")
-	f.write(',' + str(media) + ',' + str(desvio) + ',' + str(melhor_fitness) + '\n')
+	f.write(execucao + ',' + str(media) + ',' + str(desvio) + ',' + str(melhor_fitness) + '\n')
 
 vetor_fitness = []
 
@@ -168,4 +168,4 @@ melhor_fitness = min(vetor_fitness)
 media = np.mean(vetor_fitness)
 desvio = np.std(vetor_fitness)
 
-EscreveArquivo(media, desvio, melhor_fitness, instancia)
+EscreveArquivo(media, desvio, melhor_fitness, instancia, execucao)
