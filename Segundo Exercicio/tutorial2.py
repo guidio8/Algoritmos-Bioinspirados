@@ -17,8 +17,6 @@ populacao = []
 alpha = 0.75
 beta = 0.25
 
-#print("EU RECEBI O ARGUMETNO DO TXT: ", tam_pop)
-
 def func_obj(x):
 	n = float(len(x))
 	f_exp = -0.2 * math.sqrt(1/n * sum(np.power(x, 2)))
@@ -123,6 +121,8 @@ def EscreveArquivo(media, desvio, melhor_fitness, instancia, execucao):
 	path = ""
 	file_name = 'file' + instancia + '.csv'
 	f = open(file_name, "+a")
+	if(execucao == '1'):
+	    f.write(',' + 'Media' + ',' + 'Desvio' + ',' + 'Melhor Fitness' + '\n')
 	f.write(execucao + ',' + str(media) + ',' + str(desvio) + ',' + str(melhor_fitness) + '\n')
 
 vetor_fitness = []

@@ -2,12 +2,16 @@
 import math
 import numpy as np
 import random
+import sys
+import os
 
+tam_pop = int(sys.argv[3] )
+geracoes = int(sys.argv[4])
+chance_mutacao = float(sys.argv[1])
+taxa_cruzamento = float(sys.argv[2])
 dimensao = 2
 populacao = []
-tam_pop = 100
 atual = 1
-geracoes = 5
 media = 0.0
 
 def func_obj(x):
@@ -88,13 +92,15 @@ def Cruzamento(pai1, pai2, populacao, pop_aux):
 
 	#dois pais vão gerar dois filhos onde o PRIMEIRO filho possui os 3 primeiros digitos do pai 1 e os 3 ultimos do pai 2
 	#e o SEGUNDO filho possui os 3 primeiros digitos do pai 2 e os 3 ultimos do pai 1
-	for i in range(dimensao):
-		for j in range(0,3):
-			filho1.binario[i-1][j] = populacao[pai1].binario[i-1][j]
-			filho2.binario[i-1][j] = populacao[pai2].binario[i-1][j]
-		for j in range(3,6):
-			filho1.binario[i-1][j] = populacao[pai2].binario[i-1][j]
-			filho2.binario[i-1][j] = populacao[pai1].binario[i-1][j]
+	chance_cruzamento = random.random()
+	if(chance_cruzamento <= taxa_cruzamento):
+		for i in range(dimensao):
+			for j in range(0,3):
+				filho1.binario[i-1][j] = populacao[pai1].binario[i-1][j]
+				filho2.binario[i-1][j] = populacao[pai2].binario[i-1][j]
+			for j in range(3,6):
+				filho1.binario[i-1][j] = populacao[pai2].binario[i-1][j]
+				filho2.binario[i-1][j] = populacao[pai1].binario[i-1][j]
 
 	pop_aux.append(filho1)
 	pop_aux.append(filho2)
@@ -140,7 +146,7 @@ while atual < geracoes:
 
 	for i in pop_aux:
 		c_mut = random.random()
-		if c_mut <= 0.3:
+		if c_mut <= chance_mutacao:
 			Mutacao(i)
 	elitismo = Elitismo(populacao)
 	#A função de elitismo serve para saber o índice do indivíduo com melhor (no caso, menor) fitness
