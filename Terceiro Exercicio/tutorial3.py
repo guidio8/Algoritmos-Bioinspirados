@@ -5,18 +5,17 @@ import random
 import sys
 import os
 
-tam_pop = 26#int(sys.argv[3] )
-geracoes = 25#int(sys.argv[4])
-chance_mutacao = 0.01#float(sys.argv[1])
-taxa_cruzamento = 0.6#float(sys.argv[2])
-execucao = 1#sys.argv[5]
-instancia = 1#sys.argv[6]
+tam_pop = int(sys.argv[3] )
+geracoes = int(sys.argv[4])
+chance_mutacao = float(sys.argv[1])
+taxa_cruzamento = float(sys.argv[2])
+execucao = sys.argv[5]
+instancia = sys.argv[6]
 atual = 1
 media = 0.0
 
+os.chdir('valores')
 def GerarValoresIniciais(numero):
-	path = "C:/Users/Luccas/Desktop/Faculdade/Bioinspirados/Terceiro Exercicio/valores"
-	os.chdir(path)
 	os.chdir(numero)
 	profits = []
 	pesos = []
@@ -129,7 +128,7 @@ def Elitismo(populacao):
 	return indice
 
 #rodar 1 vez para cada pasta com parametros iniciais diferentes
-for pasta in range(1, 8):
+for pasta in range(1,8):
 	populacao = []
 	#valores iniciais
 	vet_profit = []
@@ -139,7 +138,7 @@ for pasta in range(1, 8):
 	vet_pesos = []
 	pop_aux = []
 
-	vet_profit, vet_pesos, capacidade, tam_mochila, solucao_otima = GerarValoresIniciais(str(1))
+	vet_profit, vet_pesos, capacidade, tam_mochila, solucao_otima = GerarValoresIniciais(str(pasta))
 
 	#gera uma população com individuos aleatórios
 	for i in range(tam_pop):
@@ -186,7 +185,10 @@ for pasta in range(1, 8):
 	media = np.mean(vetor_fitness)
 	desvio = np.std(vetor_fitness)
 
-	print(melhor_fitness)
-	print(media)
-	print(desvio)
+	#print(melhor_fitness)
+	#print(media)
+	#print(desvio)
 	EscreveArquivo(media, desvio, melhor_fitness, instancia, execucao)
+	#retornando para o diretorio "valores" para utilizar a proxima pasta com valores iniciais
+	os.chdir('..')
+	os.chdir('..')
