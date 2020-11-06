@@ -5,10 +5,10 @@ import random
 import sys
 import os
 
-tam_pop = 10#int(sys.argv[3] )
-geracoes = 10 #int(sys.argv[4])
-chance_mutacao = 1#float(sys.argv[1])
-taxa_cruzamento = 1#float(sys.argv[2])
+tam_pop = 26#int(sys.argv[3] )
+geracoes = 25#int(sys.argv[4])
+chance_mutacao = 0.01#float(sys.argv[1])
+taxa_cruzamento = 0.6#float(sys.argv[2])
 execucao = 1#sys.argv[5]
 instancia = 1#sys.argv[6]
 atual = 1
@@ -129,7 +129,7 @@ def Elitismo(populacao):
 	return indice
 
 #rodar 1 vez para cada pasta com parametros iniciais diferentes
-for pasta in range(1):
+for pasta in range(1, 8):
 	populacao = []
 	#valores iniciais
 	vet_profit = []
@@ -182,8 +182,11 @@ for pasta in range(1):
 		vetor_fitness.append(i.fitness)
 		#print(i.fitness)
 
-	melhor_fitness = min(vetor_fitness)
+	melhor_fitness = max(vetor_fitness)
 	media = np.mean(vetor_fitness)
 	desvio = np.std(vetor_fitness)
 
+	print(melhor_fitness)
+	print(media)
+	print(desvio)
 	EscreveArquivo(media, desvio, melhor_fitness, instancia, execucao)
