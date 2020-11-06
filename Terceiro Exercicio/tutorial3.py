@@ -46,15 +46,14 @@ def func_obj(vet_pesos, vet_profit, capacidade, solucao):
 	if(Somatoria(vet_pesos, solucao) <= capacidade):
 		return Somatoria(vet_profit, solucao)
 	else:
-		#copiei a funcao que estava no portal
-		#return (Somatoria(vet_pesos, solucao) - (Somatoria(vet_pesos, solucao) * (Somatoria(vet_profit, solucao) - capacidade))) 
 		return Somatoria(vet_profit, solucao) * (1 - (Somatoria(vet_pesos, solucao) - capacidade) / capacidade)
+
 class Mochila:
 	def __init__(self, geracao):
 		self.geracao = geracao
 		self.binario = GerarIndividuo(tam_mochila)
 		self.fitness = 0
-#funcao que gera uma representação binária aleatória de 6 dígitos para cada indivíduo
+
 def GerarIndividuo(tam_mochila):
 	individuo = []
 	for i in range(tam_mochila):
@@ -117,6 +116,7 @@ def Mutacao(individuo):
 				individuo.binario[i] == 1
 			else:
 				individuo.binario[i] == 0
+
 def Elitismo(populacao):
 	fitness = -100000
 	indice = 0
@@ -128,7 +128,7 @@ def Elitismo(populacao):
 	return indice
 
 #rodar 1 vez para cada pasta com parametros iniciais diferentes
-for pasta in range(1,8):
+for pasta in range(1, 9):
 	populacao = []
 	#valores iniciais
 	vet_profit = []

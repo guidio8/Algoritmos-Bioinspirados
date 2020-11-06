@@ -5,7 +5,7 @@ index=1
 cat arguments.txt | while read line 
 do
 	n=1 #executa cada entrada 10x
-	while [ $n -le 2 ]
+	while [ $n -le 10 ]
 	do
 		echo "$(python3 tutorial3.py $line $n $index)"
 		n=$(( n+1 )) #incrementa n
