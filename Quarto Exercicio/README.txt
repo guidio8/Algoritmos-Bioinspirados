@@ -1,0 +1,1 @@
+para executar o código basta executar o shell.sh na linha de comando, no windows utiliza-se o "bash shell.sh"
