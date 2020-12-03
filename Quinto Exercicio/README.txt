@@ -1,0 +1,3 @@
+Para executar o código basta rodar o shell.sh (com o bash shell.sh no windows, não sei como é no linux), o arquivo arguments.txt está incluso porém caso queira fazer alguma alteração o primeiro argumento é o fator de diversificação, o segundo os fatores cognitivo e social (mesmo valor para ambos), o terceiro é a dimensão, o quarto a quantidade de particulas por nuvem e por último a quantidade de iterações que o algoritmo vai repetir
+
+Queria também pedir desculpa pela qualidade pior dessa entrega (ja era ruim, ficou pior), mas ja estou entregando com atraso, acabei ficando sem tempo
