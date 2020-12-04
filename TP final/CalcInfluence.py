@@ -137,10 +137,10 @@ if(tipo == 0):
 elif(tipo == 1):
     solucao = calcular_solucao(100, listaSeed)
 
-print("Solucao: ", solucao, "Lista Seed: ", listaSeed)
+#print("Solucao: ", solucao, "Lista Seed: ", listaSeed)
 tempo_exec = time.time() - start_time
 g = float("{:.2f}".format(tempo_exec))
-print("Tempo de execucao: ", tempo_exec)
+#print("Tempo de execucao: ", tempo_exec)
 
 file = 'results.csv'
 fieldnames = ['sol', 'tempo_exec', 'tam_solucao','listaSeed']
