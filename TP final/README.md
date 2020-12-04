@@ -33,14 +33,14 @@
     resolução == 1 deve ser passado o nome do arquivo de entrada com as sementes
 
 #### Social network:
-	Nome do arquivo que representa a network, levando em consideração o valor
+		Nome do arquivo que representa a network, levando em consideração o valor
         passado em "tipo de entrada de texto"
 
 #### Tamanho do Grafo:
         Quantidade de vértices(indivíduos) na network
         
 #### Probabilidade:
-	Valor numérico (float) que representa a probabilidade de cada indivíduo ser
+		Valor numérico (float) que representa a probabilidade de cada indivíduo ser
         "ativado" por algum de seus vizinhos
 
 
