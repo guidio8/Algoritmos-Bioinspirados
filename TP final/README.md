@@ -16,7 +16,7 @@
 
     Tipo de entrada de texto: 
 		0 = O algoritmo consegue transformar 2 tipos de arquivos de entrada em grafos, ou uma matriz biária representando um grafo direcionado, ou seja caso i = j Elemento(i,j) = 0 (Exemplo Matriz.txt)
-		1 = Também é possível ler um arquivo de entrada onde cada linha representa uma aresta com seus extremos separados por uespaço(Exemplo List.txt)
+		1 = Também é possível ler um arquivo de entrada onde cada linha representa uma aresta com seus extremos separados por um espaço(Exemplo List.txt)
 	Tipo de resolução:
 		0 = É usado o 0 quando deseja encontrar os K vértices mais influentes na network
 		1 = Utiliza o 1 quando se tem uma lista pré-definida de vértices e deseja saber a influência destes na network, neste caso é necessário um arquivo de texto com cada elemento da lista em uma linha (Exemplo arqSeed.txt)
