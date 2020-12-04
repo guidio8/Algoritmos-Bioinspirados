@@ -10,7 +10,7 @@
 
 ## Execução
 
-    ~$ python CalcInfluence.py [Tipo de entrada de texto] [Tipo de resolução] [Parametro 3] [Social Network] [Tamanho do Grafo] (Probabilidade)
+    ~$ python CalcInfluence.py [Tipo de entrada de texto] [Tipo de resolução] [Parametro 3] [Social Network] [Tamanho do Grafo] [Probabilidade]
 
 ## Formato do arquivo de instância
 
@@ -24,22 +24,23 @@
 
 #### Tipo de resolução:
     0 = É usado o 0 quando deseja encontrar os K vértices mais influentes na network
-    1 = Utiliza o 1 quando se tem uma lista pré-definida de vértices e deseja saber a influência destes na network, neste caso é necessário um arquivo de texto com cada elemento da lista em uma linha (Exemplo arqSeed.txt)
+    1 = Utiliza o 1 quando se tem uma lista pré-definida de vértices e deseja saber a influência destes na network.
+    Neste caso é necessário um arquivo de texto com cada elemento da lista em uma linha (Exemplo arqSeed.txt)
 
 #### Parametro 3: (Valor de K OU arquivo de seeds):
-        Este parâmetro depende do anterior, caso tipo de resolução == 0 este parâmetro
+    Este parâmetro depende do anterior, caso tipo de resolução == 0 este parâmetro
     deve ser um número inteiro de 1 até quantidade de vértices, caso tipo de
     resolução == 1 deve ser passado o nome do arquivo de entrada com as sementes
 
 #### Social network:
-		Nome do arquivo que representa a network, levando em consideração o valor
+	Nome do arquivo que representa a network, levando em consideração o valor
         passado em "tipo de entrada de texto"
 
 #### Tamanho do Grafo:
         Quantidade de vértices(indivíduos) na network
         
 #### Probabilidade:
-		Valor numérico (float) que representa a probabilidade de cada indivíduo ser
+	Valor numérico (float) que representa a probabilidade de cada indivíduo ser
         "ativado" por algum de seus vizinhos
 
 
