@@ -5,8 +5,11 @@ import random
 import sys
 import os
 import re
+import time
+import csv
 
 sys.setrecursionlimit(15000)
+start_time = time.time()
 
 class Vertice:
     #Cada vertice tem um vetor para saber quem são seus vizinhos e seu status
@@ -135,3 +138,20 @@ elif(tipo == 1):
     solucao = calcular_solucao(100, listaSeed)
 
 print("Solucao: ", solucao, "Lista Seed: ", listaSeed)
+tempo_exec = time.time() - start_time
+g = float("{:.2f}".format(tempo_exec))
+print("Tempo de execucao: ", tempo_exec)
+
+file = 'results.csv'
+fieldnames = ['sol', 'tempo_exec', 'tam_solucao','listaSeed']
+if os.path.isfile(file):
+    with open(file, 'a', newline='') as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        writer.writerow(
+            {'sol': solucao, 'tempo_exec': g, 'tam_solucao': len(listaSeed), 'listaSeed': listaSeed})
+else:
+    with open(file, 'a+', newline='') as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerow(
+            {'sol': solucao, 'tempo_exec': g, 'tam_solucao': len(listaSeed), 'listaSeed': listaSeed})
