@@ -40,8 +40,8 @@
         Quantidade de vértices(indivíduos) na network
         
 #### Probabilidade:
-		Valor numérico (float) que representa a probabilidade de cada indivíduo ser
-        "ativado" por algum de seus vizinhos
+		Valor numérico (float) que representa a probabilidade de cada indivíduo NÃO ser
+        "ativado" por algum de seus vizinhos (Probabilidade de sucesso = (1 - parâmetro dado))
 
 
 Este é o arquivo Matriz.txt, este arquivo não é
